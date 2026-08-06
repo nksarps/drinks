@@ -5,6 +5,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from drf_yasg.utils import swagger_auto_schema
+
+@swagger_auto_schema(method='get', operation_summary='List drinks', operation_description='Retrieve all drinks.', tags=['Drinks'])
+@swagger_auto_schema(method='post', operation_summary='Create a drink', operation_description='Add a new drink to the catalog.', tags=['Drinks'])
 @api_view(['GET', 'POST'])
 def drink_list(request):
     if request.method == 'GET':
@@ -35,6 +39,9 @@ def drink_list(request):
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(method='get', operation_summary='Get a drink', operation_description='Retrieve a single drink by its ID.', tags=['Drinks'])
+@swagger_auto_schema(method='put', operation_summary='Update a drink', operation_description='Update an existing drink by its ID.', tags=['Drinks'])
+@swagger_auto_schema(method='delete', operation_summary='Delete a drink', operation_description='Delete a drink by its ID.', tags=['Drinks'])
 @api_view(['GET', 'PUT', 'DELETE'])
 def drink_detail(request, id):
     try:
